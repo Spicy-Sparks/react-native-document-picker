@@ -81,9 +81,31 @@ RCT_EXPORT_METHOD(pick:(NSDictionary *)options
 
     documentPicker.allowsMultipleSelection = [RCTConvert BOOL:options[OPTION_MULTIPLE]];
 
-    UIViewController *rootViewController = RCTPresentedViewController();
+    UIViewController *rootViewController = [self getRootVC];
 
     [rootViewController presentViewController:documentPicker animated:YES completion:nil];
+}
+
+
+- (UIViewController*) getRootVC {
+    NSArray *allWindows = [[UIApplication sharedApplication] windows];
+    UIWindow *topWindow = nil;
+    CGFloat highestWindowLevel = -CGFLOAT_MAX;
+
+    for (UIWindow *window in allWindows) {
+        if (window.windowLevel > highestWindowLevel) {
+            topWindow = window;
+            highestWindowLevel = window.windowLevel;
+        }
+    }
+    
+    UIViewController *root = topWindow.rootViewController;
+    
+    while (root.presentedViewController != nil) {
+        root = root.presentedViewController;
+    }
+    
+    return root;
 }
 
 

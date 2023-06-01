@@ -1,5 +1,5 @@
 {
-  "name": "react-native-document-picker",
+  "name": "@spicysparks/react-native-document-picker",
   "version": "9.0.1",
   "description": "A react native interface to access documents from dropbox, google drive, iCloud...",
   "main": "lib/commonjs/index",
