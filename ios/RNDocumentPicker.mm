@@ -93,7 +93,7 @@ RCT_EXPORT_METHOD(pick:(NSDictionary *)options
     CGFloat highestWindowLevel = -CGFLOAT_MAX;
 
     for (UIWindow *window in allWindows) {
-        if (window.windowLevel > highestWindowLevel) {
+        if (window.windowLevel > highestWindowLevel && window.rootViewController != nil) {
             topWindow = window;
             highestWindowLevel = window.windowLevel;
         }
